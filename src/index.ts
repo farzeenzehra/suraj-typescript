@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from "express";
-const serverless = require("serverless-http");
+import serverless from "serverless-http";
 
 import { ethers } from "ethers";
 import { InformationGetter, ERC721A } from "./typechain-types";
