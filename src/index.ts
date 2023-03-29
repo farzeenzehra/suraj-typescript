@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+const serverless = require("serverless-http");
 
 import { ethers } from "ethers";
 import { InformationGetter, ERC721A } from "./typechain-types";
@@ -14,12 +15,14 @@ const menCollection = "metadrobemen";
 
 
 const app = express();
+const router = express.Router();
 
-app.get("/", (req: Request, res: Response) => {
+
+router.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
-app.get(
+router.get(
   "/registry/:collectionMeme/address/:address/assets",
   async (req: Request, res: Response) => {
     const { address, id, collectionMeme } = req.params;
@@ -56,7 +59,7 @@ app.get(
   }
 );
 
-app.get(
+router.get(
   "/registry/:collectionName/address/:address/assets/:id",
 
   async (req: Request, res: Response) => {
@@ -94,6 +97,13 @@ app.get(
   }
 );
 
-app.listen(3000, () => {
-  console.log(`[server]: Server is running at http://localhost:${3000}`);
-});
+// app.listen(3000, () => {
+//   console.log(`[server]: Server is running at http://localhost:${3000}`);
+// });
+
+// Use the router to handle requests to the `/.netlify/functions/api` path
+app.use(`/.netlify/functions/api`, router);
+
+// Export the app and the serverless function
+module.exports = app;
+module.exports.handler = serverless(app);
