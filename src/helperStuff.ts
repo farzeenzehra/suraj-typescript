@@ -1,9 +1,9 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { ethers } from "ethers";
-import { InformationGetter, ERC721A } from "../typechain-types";
-import InformationGetterABI from "../InformationGetter.json";
-import MetaDrobeABI from "../Metadrobe.json";
+import { InformationGetter, ERC721A } from "./typechain-types";
+import InformationGetterABI from "./InformationGetter.json";
+import MetaDrobeABI from "./Metadrobe.json";
 import { UrnStuff } from "./generalStuff";
 
 export const metadrobeWomenHelper = async (

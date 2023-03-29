@@ -105,5 +105,8 @@ router.get(
 app.use(`/.netlify/functions/api`, router);
 
 // Export the app and the serverless function
-module.exports = app;
-module.exports.handler = serverless(app);
+export default app;
+const handler = serverless(app);
+export {
+  handler
+};
